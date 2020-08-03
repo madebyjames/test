@@ -10,7 +10,6 @@
 
 
 name: release and deploy
-# test 3
 on:
   push:
     branches:
@@ -30,11 +29,8 @@ jobs:
     - name: NPM install
       run: npm install
 
-    - name: Hello world action step
-      uses: ./.github/actions/standard-version # Uses an action in the root directory
-      id: hello
-      with:
-        who-to-greet: 'Mona the Octocat'
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+    # - name: Generate release notes and tag
+    #   uses: ./.github/actions/standard-version
+
+    - name: Generate release notes and tag
+      run: npx standard-version
