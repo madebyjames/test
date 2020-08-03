@@ -10,6 +10,7 @@
 
 
 name: release and deploy
+# test
 on:
   push:
     branches:
