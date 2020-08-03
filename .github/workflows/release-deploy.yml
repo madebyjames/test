@@ -25,12 +25,10 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      run: npx standard-version
 
-    - name: NPM install
-      run: npm install
+    # - name: NPM install
+    #   run: npm install
 
     # - name: Generate release notes and tag
     #   uses: ./.github/actions/standard-version
-
-    - name: Generate release notes and tag
-      run: npx standard-version
