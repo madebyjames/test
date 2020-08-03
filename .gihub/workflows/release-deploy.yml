@@ -1,0 +1,38 @@
+# https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request
+# https://docs.github.com/en/developers/webhooks-and-events/webhook-events-and-payloads#pull_request
+# https://docs.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow#using-the-checkout-action
+# https://www.npmjs.com/package/standard-version
+# https://semver.org/
+# https://github.com/semantic-release/semantic-release#commit-message-format
+
+
+
+
+
+name: release and deploy
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
+
+jobs:
+  build:
+    # https://docs.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners#supported-runners-and-hardware-resources
+    # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: Hello world action step
+      uses: ./ # Uses an action in the root directory
+      id: hello
+      with:
+        who-to-greet: 'Mona the Octocat'
+    # Use the output from the `hello` step
+    - name: Get the output time
+      run: echo "The time was ${{ steps.hello.outputs.time }}"
